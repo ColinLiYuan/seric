@@ -33,7 +33,7 @@ export async function fetchApi(path: string) {
     const parts = path.split('/');
     if (parts.length === 3) {
       // /products/{slug}
-      const p = all.find(x => x.slug === parts[1]);
+      const p = all.find(x => x.slug === parts[2]);
       if (!p) throw new Error('Product not found');
       return {
         ...p,
@@ -41,15 +41,18 @@ export async function fetchApi(path: string) {
         images: JSON.parse(p.images || '[]').map(preImg),
       };
     }
-    if (parts.length === 4 && parts[3].startsWith('related')) {
+    if (parts.length >= 4 && parts[3].startsWith('related')) {
       // /products/{slug}/related
-      const p = all.find(x => x.slug === parts[1]);
+      const p = all.find(x => x.slug === parts[2]);
       if (!p || !p.category_slug) return [];
       const limit = parseInt(new URL('http://localhost' + path).searchParams.get('limit') || '10');
-      return all.filter(x => x.category_slug === p.category_slug && x.slug !== p.slug).slice(0, limit);
+      return all
+        .filter(x => x.category_slug === p.category_slug && x.slug !== p.slug)
+        .slice(0, limit)
+        .map(x => ({ ...x, image: preImg(x.image) }));
     }
 
-    return result;
+    return result.map(x => ({ ...x, image: preImg(x.image) }));
   }
 
   return [];

@@ -21,7 +21,7 @@ export default async function ProductDetailPage({
   const related = (await fetchApi(`/products/${slug}/related?limit=10`)) || [];
 
   const name = product.name_en || '';
-  const images: string[] = product.images ? JSON.parse(product.images || '[]') : [];
+  const images: string[] = Array.isArray(product.images) ? product.images : [];
   if (!images.length && product.image) images.push(product.image);
   const categorySlug = product.category_slug || '';
   const descriptionHtml = product.description_en || '';
