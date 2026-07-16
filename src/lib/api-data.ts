@@ -35,10 +35,12 @@ export async function fetchApi(path: string) {
       // /products/{slug}
       const p = all.find(x => x.slug === parts[2]);
       if (!p) throw new Error('Product not found');
+      const descEn = (p.description_en || '').replace(/src=\"products\//g, 'src=\"'+CDN+'/products/');
       return {
         ...p,
         image: preImg(p.image),
         images: JSON.parse(p.images || '[]').map(preImg),
+        description_en: descEn,
       };
     }
     if (parts.length >= 4 && parts[3].startsWith('related')) {
@@ -57,6 +59,17 @@ export async function fetchApi(path: string) {
 
   return [];
 }
+
+export function getCategoryCounts(): Record<string, number> {
+  const counts: Record<string, number> = {};
+  all.forEach(p => {
+    const s = p.category_slug || 'other';
+    counts[s] = (counts[s] || 0) + 1;
+  });
+  return counts;
+}
+export function getTotalCount(): number { return all.length; }
+
 
 export function flatProduct(p: any) {
   return {

@@ -1,4 +1,4 @@
-import { fetchApi, flatProduct } from '@/lib/api-data';
+import { fetchApi, flatProduct, getCategoryCounts, getTotalCount } from '@/lib/api-data';
 import { categories as categoriesData } from '@/data/categories';
 import Link from 'next/link';
 import { ChevronRight, Filter } from 'lucide-react';
@@ -22,6 +22,8 @@ export default async function ProductsPage({
     name_en: (c.name as Record<string, string>)['en'] || c.slug,
   }));
 
+  const counts = getCategoryCounts();
+  const totalAll = getTotalCount();
   const currentCategory = category ? categories.find(c => c.slug === category) : null;
 
   return (
@@ -51,11 +53,13 @@ export default async function ProductsPage({
                 <Link href={`/${locale}/products`}
                   className={`flex items-center justify-between px-4 py-2.5 text-sm transition ${!category ? 'bg-red-50 text-brand-red font-semibold border-r-2 border-brand-red' : 'text-gray-700 hover:bg-gray-50'}`}>
                   All Products
+                  <span className="text-xs text-gray-400">{totalAll}</span>
                 </Link>
                 {categories.map(cat => (
                   <Link key={cat.slug} href={`/${locale}/products?category=${cat.slug}`}
                     className={`flex items-center justify-between px-4 py-2.5 text-sm transition ${category === cat.slug ? 'bg-red-50 text-brand-red font-semibold border-r-2 border-brand-red' : 'text-gray-700 hover:bg-gray-50'}`}>
                     <span className="line-clamp-1">{cat.name_en}</span>
+                    <span className="text-xs text-gray-400 ml-2">{counts[cat.slug] || 0}</span>
                   </Link>
                 ))}
               </nav>
@@ -69,11 +73,11 @@ export default async function ProductsPage({
               <ChevronRight size={14} className="ml-auto" />
             </summary>
             <div className="bg-white border border-t-0 rounded-b-lg overflow-hidden">
-              <Link href={`/${locale}/products`} className={`block px-4 py-2.5 text-sm ${!category ? 'bg-red-50 text-brand-red font-semibold' : 'text-gray-700'}`}>All Products</Link>
+              <Link href={`/${locale}/products`} className={`block px-4 py-2.5 text-sm ${!category ? 'bg-red-50 text-brand-red font-semibold' : 'text-gray-700'}`}>All Products ({totalAll})</Link>
               {categories.map(cat => (
                 <Link key={cat.slug} href={`/${locale}/products?category=${cat.slug}`}
                   className={`block px-4 py-2.5 text-sm ${category === cat.slug ? 'bg-red-50 text-brand-red font-semibold' : 'text-gray-700'}`}>
-                  {cat.name_en}
+                  {cat.name_en} ({counts[cat.slug] || 0})
                 </Link>
               ))}
             </div>
