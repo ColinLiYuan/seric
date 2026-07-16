@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { ChevronRight, Mail, MessageCircle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import DOMPurify from 'isomorphic-dompurify';
 import SimilarProducts from '@/components/product/SimilarProducts';
 import ImageGallery from '@/components/product/ImageGallery';
 import { fetchApi } from '@/lib/api-data';
@@ -79,7 +78,7 @@ export default async function ProductDetailPage({
             </div>
             <div
               className="p-6 text-sm text-gray-600 leading-relaxed description-content"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(descriptionHtml) }}
+              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
             />
           </div>
         )}
