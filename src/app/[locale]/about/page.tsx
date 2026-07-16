@@ -17,7 +17,7 @@ export default async function AboutPage({
       {/* Banner */}
       <div className="relative w-full h-64 md:h-80 bg-gray-900 overflow-hidden">
         <img
-          src="/images/cs206444715-.jpg"
+          src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cs206444715-.jpg"
           alt="About Us"
           className="w-full h-full object-cover opacity-60"
         />
@@ -117,7 +117,7 @@ export default async function AboutPage({
             {/* Main Company Image */}
             <div className="mb-10 rounded-lg overflow-hidden">
               <img
-                src="/images/cl211460488-guangzhou_seric_hydraulic_co_ltd.jpg"
+                src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cl211460488-guangzhou_seric_hydraulic_co_ltd.jpg"
                 alt={`${companyInfo.name} Company Profile`}
                 className="w-full object-cover"
               />
@@ -136,7 +136,7 @@ export default async function AboutPage({
               </div>
               <div className="mt-6 rounded-lg overflow-hidden">
                 <img
-                  src="/images/editor/20251230165037_83450.jpg"
+                  src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/editor/20251230165037_83450.jpg"
                   alt="Production Facility"
                   className="w-full object-cover"
                 />
@@ -171,7 +171,7 @@ export default async function AboutPage({
               </div>
               <div className="mt-6 rounded-lg overflow-hidden">
                 <img
-                  src="/images/editor/20251230170634_58377.jpg"
+                  src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/editor/20251230170634_58377.jpg"
                   alt="Services"
                   className="w-full object-cover"
                 />
@@ -205,7 +205,7 @@ export default async function AboutPage({
               </div>
               <div className="mt-6 rounded-lg overflow-hidden">
                 <img
-                  src="/images/editor/20251230173118_31310.jpg"
+                  src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/editor/20251230173118_31310.jpg"
                   alt="Seric Team"
                   className="w-full object-cover"
                 />

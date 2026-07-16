@@ -1,6 +1,13 @@
 import products from '@/data/products.json';
 
+const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 const all = products as any[];
+
+function preImg(path: string): string {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  return CDN + '/' + path;
+}
 
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -28,7 +35,11 @@ export async function fetchApi(path: string) {
       // /products/{slug}
       const p = all.find(x => x.slug === parts[1]);
       if (!p) throw new Error('Product not found');
-      return p;
+      return {
+        ...p,
+        image: preImg(p.image),
+        images: JSON.parse(p.images || '[]').map(preImg),
+      };
     }
     if (parts.length === 4 && parts[3].startsWith('related')) {
       // /products/{slug}/related
@@ -49,5 +60,6 @@ export function flatProduct(p: any) {
     ...p,
     name_en: p.name_en || '',
     category_slug: p.category_slug,
+    image: preImg(p.image),
   };
 }

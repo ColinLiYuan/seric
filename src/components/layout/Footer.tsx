@@ -16,7 +16,7 @@ export default function Footer({ locale }: { locale: string }) {
           {/* Logo */}
           <div className="flex items-start">
             <img
-              src="/images/logo.gif"
+              src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/logo.gif"
               alt={companyInfo.name}
               className="h-10 bg-white rounded p-1"
             />

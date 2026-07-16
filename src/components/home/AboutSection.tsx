@@ -14,7 +14,7 @@ export default function AboutSection({ locale }: { locale: string }) {
           {/* Image */}
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
             <img
-              src="/images/cl211460488-guangzhou_seric_hydraulic_co_ltd.jpg"
+              src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cl211460488-guangzhou_seric_hydraulic_co_ltd.jpg"
               alt={companyInfo.name}
               className="w-full h-full object-cover"
             />

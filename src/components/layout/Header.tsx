@@ -19,7 +19,7 @@ export default function Header({ locale, categories }: { locale: string; categor
           {/* Logo */}
           <Link href={`/${locale}`} className="flex-shrink-0">
             <img
-              src="/images/logo.gif"
+              src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/logo.gif"
               alt="Guangzhou Seric Hydraulic Co., Ltd."
               className="h-12 w-auto"
             />

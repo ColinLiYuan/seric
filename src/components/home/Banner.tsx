@@ -10,17 +10,17 @@ import 'swiper/css/navigation';
 
 const slides = [
   {
-    image: '/images/cs211459195-hydraulic_orbit_motor.jpg',
+    image: 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cs211459195-hydraulic_orbit_motor.jpg',
     category: 'hydraulic-orbit-motor',
     alt: 'Hydraulic Orbit Motor',
   },
   {
-    image: '/images/cs206448565-solenoid_directional_control_valve.jpg',
+    image: 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cs206448565-solenoid_directional_control_valve.jpg',
     category: 'solenoid-directional-control-valve',
     alt: 'Solenoid Directional Control Valve',
   },
   {
-    image: '/images/cs206857389-hydraulic_vane_pump.jpg',
+    image: 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cs206857389-hydraulic_vane_pump.jpg',
     category: 'hydraulic-vane-pump',
     alt: 'Hydraulic Vane Pump',
   },

@@ -94,7 +94,7 @@ export default async function ProductsPage({
                   <Link key={product.id} href={`/${locale}/products/${product.slug}`}
                     className="group bg-white rounded-lg border overflow-hidden hover:shadow-lg transition flex flex-col">
                     <div className="aspect-square bg-gray-100 overflow-hidden">
-                      <img src={product.image || '/images/load_icon.gif'}
+                      <img src={product.image || 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/load_icon.gif'}
                         alt={product.name_en} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
                     </div>
                     <div className="p-5 flex flex-col flex-1">

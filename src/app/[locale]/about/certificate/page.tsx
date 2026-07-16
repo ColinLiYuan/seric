@@ -17,7 +17,7 @@ export default async function CertificatePage({
       {/* Banner */}
       <div className="relative w-full h-64 md:h-80 bg-gray-900 overflow-hidden">
         <img
-          src="/images/cs206444715-.jpg"
+          src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cs206444715-.jpg"
           alt="Certifications"
           className="w-full h-full object-cover opacity-60"
         />

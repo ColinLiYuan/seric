@@ -17,7 +17,7 @@ export default async function FactoryPage({
       {/* Banner */}
       <div className="relative w-full h-64 md:h-80 bg-gray-900 overflow-hidden">
         <img
-          src="/images/cs206444715-.jpg"
+          src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cs206444715-.jpg"
           alt="Factory Tour"
           className="w-full h-full object-cover opacity-60"
         />
@@ -114,21 +114,21 @@ export default async function FactoryPage({
             <div className="space-y-6">
               <div className="rounded-lg overflow-hidden">
                 <img
-                  src="/images/cl206225628-guangzhou_seric_hydraulic_co_ltd.jpg"
+                  src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cl206225628-guangzhou_seric_hydraulic_co_ltd.jpg"
                   alt="Production Line"
                   className="w-full object-cover"
                 />
               </div>
               <div className="rounded-lg overflow-hidden">
                 <img
-                  src="/images/cl206225626-guangzhou_seric_hydraulic_co_ltd.jpg"
+                  src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cl206225626-guangzhou_seric_hydraulic_co_ltd.jpg"
                   alt="Production Line"
                   className="w-full object-cover"
                 />
               </div>
               <div className="rounded-lg overflow-hidden">
                 <img
-                  src="/images/cl206225627-guangzhou_seric_hydraulic_co_ltd.jpg"
+                  src="https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/cl206225627-guangzhou_seric_hydraulic_co_ltd.jpg"
                   alt="Production Line"
                   className="w-full object-cover"
                 />
