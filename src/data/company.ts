@@ -14,7 +14,7 @@ Company Aim: Survive through high-quality products.
 Company Philosophy: Continuously offer high-quality products at low prices, truly achieving excellent quality and affordability.`,
   address: 'Room 211, No. 9, Wanyu Street, Huangpu District, Guangzhou City',
   email: 'salesseric@aliyun.com',
-  phone: '+853 6215 7192',
+  phone: '+86 17620189025',
   tel: '86-20-82674399',
   whatsapp: '85362157192',
   wechat: 'namagicshen',
