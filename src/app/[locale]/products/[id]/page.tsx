@@ -20,11 +20,12 @@ export default async function ProductDetailPage({
 
   const related = (await fetchApi(`/products/${slug}/related?limit=10`)) || [];
 
-  const name = product.name_en || '';
+  const name = product.name?.en || product.name_en || '';
   const images: string[] = Array.isArray(product.images) ? product.images : [];
   if (!images.length && product.image) images.push(product.image);
-  const categorySlug = product.category_slug || '';
-  const descriptionHtml = product.description_en || '';
+  const categorySlug = product.categorySlug || product.category_slug || '';
+  const descriptionHtml = product.description?.en || product.description_en || '';
+  const categoryName = product.categoryName?.en || '';
 
   return (
     <div className="bg-white">
@@ -38,7 +39,7 @@ export default async function ProductDetailPage({
               <>
                 <ChevronRight size={12} />
                 <Link href={`/${locale}/products?category=${categorySlug}`} className="hover:text-brand-red">
-                  {categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
+                  {categoryName || categorySlug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
                 </Link>
               </>
             )}
