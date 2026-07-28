@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { ChevronRight, Mail, MessageCircle } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import SimilarProducts from '@/components/product/SimilarProducts';
 import ImageGallery from '@/components/product/ImageGallery';
+import ActionButtons from '@/components/product/ActionButtons';
 import { fetchApi } from '@/lib/api-data';
 
 export default async function ProductDetailPage({
@@ -58,16 +59,11 @@ export default async function ProductDetailPage({
               <p className="text-xl font-bold text-brand-red mb-4">{product.price}</p>
             )}
 
-            <div className="flex flex-col gap-3">
-              <button className="flex items-center justify-center gap-2 bg-gradient-to-b from-[#ff8a3d] to-[#e6731a] text-white px-6 py-3.5 rounded font-semibold hover:from-[#e6731a] hover:to-[#cc5f0a] transition text-base">
-                <Mail size={18} />
-                {tt('getBestPrice')}
-              </button>
-              <button className="flex items-center justify-center gap-2 bg-gradient-to-b from-[#4caf50] to-[#388e3c] text-white px-6 py-3 rounded font-semibold hover:from-[#388e3c] hover:to-[#2e7d32] transition text-sm">
-                <MessageCircle size={16} />
-                Chat Now
-              </button>
-            </div>
+            <ActionButtons
+              getBestPriceText={tt('getBestPrice')}
+              productSlug={slug}
+              productName={name}
+            />
           </div>
         </div>
 

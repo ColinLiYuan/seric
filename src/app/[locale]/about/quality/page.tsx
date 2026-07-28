@@ -1,6 +1,7 @@
 import { companyInfo } from '@/data/company';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import SidebarInquiry from '@/components/layout/SidebarInquiry';
 import { ChevronRight, Home, Search, ClipboardCheck, Wrench, Gauge } from 'lucide-react';
 
 export default async function QualityPage({

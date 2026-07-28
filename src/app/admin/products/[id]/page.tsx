@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { products as productsApi, isLoggedIn } from '@/lib/api';
 import { categories as hardcodedCats } from '@/data/categories';
 import { ArrowLeft, Save } from 'lucide-react';
+import ImageUploader from '@/components/admin/ImageUploader';
 
 export default function AdminProductEditPage() {
   const params = useParams();
@@ -128,10 +129,8 @@ export default function AdminProductEditPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Main Image Path</label>
-            <input value={form.image} onChange={e => setForm({...form, image: e.target.value})}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-red"
-              placeholder="/images/py206046952-xxx.jpg" />
+            <label className="block text-sm font-medium text-gray-700 mb-1">Main Image</label>
+            <ImageUploader value={form.image} onChange={(url) => setForm({...form, image: url})} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>

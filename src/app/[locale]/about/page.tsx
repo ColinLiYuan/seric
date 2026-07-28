@@ -1,6 +1,7 @@
 import { companyInfo } from '@/data/company';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import SidebarInquiry from '@/components/layout/SidebarInquiry';
 import { ChevronRight, Home, Mail, Phone, MapPin } from 'lucide-react';
 
 export default async function AboutPage({
@@ -76,32 +77,7 @@ export default async function AboutPage({
               </nav>
             </div>
 
-            {/* Contact form sidebar */}
-            <div className="bg-white rounded-lg shadow-sm border mt-4 sticky top-[340px]">
-              <div className="px-4 py-3 border-b bg-gray-900 text-white rounded-t-lg">
-                <h2 className="font-semibold">{t('leaveMessage')}</h2>
-              </div>
-              <div className="p-4">
-                <div className="space-y-3">
-                  <textarea
-                    rows={3}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-red resize-none"
-                    placeholder={t('sendMessage')}
-                  />
-                  <input
-                    type="email"
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-red"
-                    placeholder={t('enterEmail')}
-                  />
-                  <button
-                    type="button"
-                    className="w-full bg-brand-red text-white py-2 rounded text-sm font-semibold hover:bg-red-700 transition"
-                  >
-                    {tc('send')}
-                  </button>
-                </div>
-              </div>
-            </div>
+            <SidebarInquiry leaveMessageText={t('leaveMessage')} sendMessageText={t('sendMessage')} enterEmailText={t('enterEmail')} sendText={tc('send')} />
           </aside>
 
           {/* Main Content */}
