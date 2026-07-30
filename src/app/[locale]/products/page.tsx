@@ -1,4 +1,4 @@
-import { fetchApi, flatProduct, getCategoryCounts, getTotalCount } from '@/lib/api-data';
+import { fetchApi, flatProduct } from '@/lib/api-data';
 import { categories as categoriesData } from '@/data/categories';
 import Link from 'next/link';
 import { ChevronRight, Filter } from 'lucide-react';
@@ -15,15 +15,17 @@ export default async function ProductsPage({
   const { category } = await searchParams;
   const tt = await getTranslations({ locale, namespace: 'common' });
 
-  const products = (await fetchApi(`/products${category ? '?category=' + category : ''}`)).map(flatProduct);
+  const allProducts = (await fetchApi('/products')).map(flatProduct);
+  const products = category ? allProducts.filter((p: any) => p.category_slug === category) : allProducts;
 
   const categories = categoriesData.map(c => ({
     slug: c.slug,
     name_en: (c.name as Record<string, string>)['en'] || c.slug,
   }));
 
-  const counts = getCategoryCounts();
-  const totalAll = getTotalCount();
+  const counts: Record<string, number> = {};
+  allProducts.forEach((p: any) => { const s = p.category_slug || 'other'; counts[s] = (counts[s] || 0) + 1; });
+  const totalAll = allProducts.length;
   const currentCategory = category ? categories.find(c => c.slug === category) : null;
 
   return (

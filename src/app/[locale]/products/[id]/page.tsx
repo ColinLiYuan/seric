@@ -7,6 +7,9 @@ import ImageGallery from '@/components/product/ImageGallery';
 import ActionButtons from '@/components/product/ActionButtons';
 import { fetchApi } from '@/lib/api-data';
 
+const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
+function preImg(p: string) { if (!p) return ''; if (p.startsWith('http')) return p; return CDN + '/' + p; }
+
 export default async function ProductDetailPage({
   params,
 }: {
@@ -21,8 +24,8 @@ export default async function ProductDetailPage({
   const related = (await fetchApi(`/products/${slug}/related?limit=10`)) || [];
 
   const name = product.name?.en || product.name_en || '';
-  const images: string[] = Array.isArray(product.images) ? product.images : [];
-  if (!images.length && product.image) images.push(product.image);
+  const images: string[] = Array.isArray(product.images) ? product.images.map(preImg) : [];
+  if (!images.length && product.image) images.push(preImg(product.image));
   const categorySlug = product.categorySlug || product.category_slug || '';
   const descriptionHtml = product.description?.en || product.description_en || '';
   const categoryName = product.categoryName?.en || '';
