@@ -42,7 +42,6 @@ export async function fetchApi(path: string) {
         .slice(0, limit)
         .map(x => ({ ...x, image: preImg(x.image) }));
     }
-
     return result.map(x => ({ ...x, image: preImg(x.image) }));
   }
   return [];
@@ -53,6 +52,7 @@ export function getCategoryCounts(): Record<string, number> {
   all.forEach(p => { const s = p.category_slug || 'other'; counts[s] = (counts[s] || 0) + 1; });
   return counts;
 }
+
 export function getTotalCount(): number { return all.length; }
 
 export function flatProduct(p: any) {

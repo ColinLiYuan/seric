@@ -63,3 +63,10 @@ export const products = {
   update: (id: number, d: any) => request(`/admin/products/${id}`, { method: 'PUT', body: JSON.stringify(d) }),
   delete: (id: number) => request(`/admin/products/${id}`, { method: 'DELETE' }),
 };
+
+export const blogs = {
+  list: () => request('/admin/blogs'),
+  create: (d: any) => request('/admin/blogs', { method: 'POST', body: JSON.stringify(d) }),
+  update: (id: number, d: any) => request(`/admin/blogs/${id}`, { method: 'PUT', body: JSON.stringify(d) }),
+  delete: (id: number) => request(`/admin/blogs/${id}`, { method: 'DELETE' }),
+};

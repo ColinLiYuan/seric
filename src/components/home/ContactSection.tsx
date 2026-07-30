@@ -16,9 +16,17 @@ export default function ContactSection({ locale }: { locale: string }) {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      await fetch(`${API}/inquiry`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, sourceUrl: window.location.href }),
+      });
+    } catch {}
     setSubmitted(true);
   };
 

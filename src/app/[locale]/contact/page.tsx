@@ -6,16 +6,18 @@ import { companyInfo } from '@/data/company';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: '',
-  });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' });
+  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      await fetch(`${API}/inquiry`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, sourceUrl: window.location.href }),
+      });
+    } catch {}
     setSubmitted(true);
   };
 

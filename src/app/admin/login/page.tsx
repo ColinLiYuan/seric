@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { login, isLoggedIn } from '@/lib/api';
-import { LogIn } from 'lucide-react';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -11,62 +10,42 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [checking, setChecking] = useState(true);
 
-  if (typeof window !== 'undefined' && isLoggedIn()) {
-    router.push('/admin/products');
-    return null;
-  }
+  useEffect(() => {
+    if (isLoggedIn()) { router.push('/admin/products'); return; }
+    setChecking(false);
+  }, []);
+
+  if (checking) return null;
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-      await login(username, password);
-      router.push('/admin/products');
-    } catch (err: any) {
-      setError(err.message || 'Login failed');
-    } finally {
-      setLoading(false);
-    }
+    e.preventDefault(); setError(''); setLoading(true);
+    try { await login(username, password); router.push('/admin/products'); }
+    catch { setError('Invalid credentials'); } finally { setLoading(false); }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
-          <p className="text-sm text-gray-500 mt-1">Seric Hydraulic</p>
-        </div>
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-sm text-red-600">
-            {error}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 w-full max-w-sm shadow-2xl">
+        <div className="text-center mb-8">
+          <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-white font-bold text-xl">S</span>
           </div>
-        )}
+          <h1 className="text-white text-xl font-bold">Seric Admin</h1>
+          <p className="text-gray-500 text-sm mt-1">Sign in to continue</p>
+        </div>
+        {error && <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-red"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-red"
-            required
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-brand-red text-white py-2 rounded font-semibold hover:bg-red-700 transition disabled:opacity-50"
-          >
-            <LogIn size={18} />
-            {loading ? 'Logging in...' : 'Login'}
+          <input type="text" placeholder="Username" value={username}
+            onChange={e => setUsername(e.target.value)}
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500 transition" required />
+          <input type="password" placeholder="Password" value={password}
+            onChange={e => setPassword(e.target.value)}
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500 transition" required />
+          <button type="submit" disabled={loading}
+            className="w-full bg-blue-500 text-white py-2.5 rounded-lg font-medium text-sm hover:bg-blue-600 transition disabled:opacity-50">
+            {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
       </div>
