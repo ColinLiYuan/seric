@@ -12,19 +12,23 @@ const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 function preImg(p: string) { if (!p) return ''; if (p.startsWith('http')) return p; return CDN + '/' + p; }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {
-  const { id: slug } = await params;
-  const product = await fetchApi(`/products/${slug}`);
-  if (!product) return { title: 'Product Not Found' };
-  const name = product.name?.en || product.name_en || product.slug;
-  return {
-    title: name,
-    description: (product.description?.en || '').replace(/<[^>]+>/g, '').substring(0, 160),
-    openGraph: {
+  try {
+    const { id: slug } = await params;
+    const product = await fetchApi(`/products/${slug}`);
+    if (!product) return { title: 'Product Not Found' };
+    const name = product.name?.en || product.name_en || product.slug;
+    return {
       title: name,
       description: (product.description?.en || '').replace(/<[^>]+>/g, '').substring(0, 160),
-      images: [product.image?.startsWith('http') ? product.image : `https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/${product.image}`],
-    },
-  };
+      openGraph: {
+        title: name,
+        description: (product.description?.en || '').replace(/<[^>]+>/g, '').substring(0, 160),
+        images: [product.image?.startsWith('http') ? product.image : `https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/${product.image}`],
+      },
+    };
+  } catch {
+    return { title: 'Product Details' };
+  }
 }
 
 export default async function ProductDetailPage({
