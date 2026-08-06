@@ -49,3 +49,31 @@ body {
   max-width: 100%;
   height: auto;
 }
+.description-content .key_wrap {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.description-content .key_wrap .tag_words {
+  display: inline;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+.description-content .key_wrap .tag_words a {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #f1f5f9;
+  color: #475569;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.description-content .key_wrap .tag_words a:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}

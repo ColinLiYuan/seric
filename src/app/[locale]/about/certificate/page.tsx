@@ -83,7 +83,7 @@ export default async function CertificatePage({
           {/* Main Content */}
           <div className="flex-1 min-w-0">
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">{companyInfo.name}</h1>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">{t("certifications")}</h1>
             </div>
 
             {/* Certification Items */}

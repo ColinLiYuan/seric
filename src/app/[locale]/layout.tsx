@@ -2,9 +2,31 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { locales } from '@/i18n/config';
+import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { categories as categoriesData } from '@/data/categories';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isDefault = locale === 'en';
+  const alternates: Record<string, string> = {};
+  for (const loc of locales) {
+    alternates[loc] = `/${loc}`;
+  }
+
+  return {
+    alternates: {
+      canonical: isDefault ? 'https://www.hydra-pumps.com' : `https://www.hydra-pumps.com/${locale}`,
+      languages: alternates,
+    },
+    openGraph: {
+      locale: locale,
+      type: 'website',
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,

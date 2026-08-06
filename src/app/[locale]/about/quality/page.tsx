@@ -83,7 +83,7 @@ export default async function QualityPage({
           {/* Main Content */}
           <div className="flex-1 min-w-0">
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">{companyInfo.name}</h1>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">{t("qcProfile")}</h1>
               <p className="text-gray-500">
                 Quality control is at the core of our manufacturing process. Every product undergoes rigorous
                 testing and inspection before leaving our factory.

@@ -1,10 +1,39 @@
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
-      ]
-    }
+  "redirects": [
+    { "source": "/english/:path*", "destination": "/en/:path*", "permanent": true },
+    { "source": "/french/:path*", "destination": "/fr/:path*", "permanent": true },
+    { "source": "/german/:path*", "destination": "/de/:path*", "permanent": true },
+    { "source": "/italian/:path*", "destination": "/it/:path*", "permanent": true },
+    { "source": "/russian/:path*", "destination": "/ru/:path*", "permanent": true },
+    { "source": "/spanish/:path*", "destination": "/es/:path*", "permanent": true },
+    { "source": "/portuguese/:path*", "destination": "/pt/:path*", "permanent": true },
+    { "source": "/dutch/:path*", "destination": "/nl/:path*", "permanent": true },
+    { "source": "/greek/:path*", "destination": "/el/:path*", "permanent": true },
+    { "source": "/japanese/:path*", "destination": "/ja/:path*", "permanent": true },
+    { "source": "/korean/:path*", "destination": "/ko/:path*", "permanent": true },
+    { "source": "/arabic/:path*", "destination": "/ar/:path*", "permanent": true },
+    { "source": "/hindi/:path*", "destination": "/hi/:path*", "permanent": true },
+    { "source": "/turkish/:path*", "destination": "/tr/:path*", "permanent": true },
+    { "source": "/indonesian/:path*", "destination": "/id/:path*", "permanent": true },
+    { "source": "/vietnamese/:path*", "destination": "/vi/:path*", "permanent": true },
+    { "source": "/thai/:path*", "destination": "/th/:path*", "permanent": true },
+    { "source": "/bengali/:path*", "destination": "/bn/:path*", "permanent": true },
+    { "source": "/persian/:path*", "destination": "/fa/:path*", "permanent": true },
+    { "source": "/polish/:path*", "destination": "/pl/:path*", "permanent": true },
+    { "source": "/chinese/:path*", "destination": "/zh/:path*", "permanent": true },
+    { "source": "/products.html", "destination": "/en/products", "permanent": true },
+    { "source": "/aboutus.html", "destination": "/en/about", "permanent": true },
+    { "source": "/contactus.html", "destination": "/en/contact", "permanent": true },
+    { "source": "/factory.html", "destination": "/en/about/factory", "permanent": true },
+    { "source": "/certificate.html", "destination": "/en/about/certificate", "permanent": true },
+    { "source": "/quality.html", "destination": "/en/about/quality", "permanent": true },
+    { "source": "/contactnow.html", "destination": "/en/quote", "permanent": true },
+    { "source": "/news.html", "destination": "/en/news", "permanent": true },
+    { "source": "/cases.html", "destination": "/en/cases", "permanent": true },
+    { "source": "/privacy.html", "destination": "/en/privacy", "permanent": true },
+    { "source": "/sitemap.html", "destination": "/en/sitemap", "permanent": true },
+    { "source": "/sale-:id-:slug.html", "destination": "/en/products/:id-:slug", "permanent": true },
+    { "source": "/supplier-:id-:slug", "destination": "/en/products?category=:slug", "permanent": true },
+    { "source": "/supplier-:id-:slug--p:page.html", "destination": "/en/products?category=:slug", "permanent": true }
   ]
 }

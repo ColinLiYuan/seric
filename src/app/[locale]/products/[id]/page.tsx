@@ -5,10 +5,27 @@ import { notFound } from 'next/navigation';
 import SimilarProducts from '@/components/product/SimilarProducts';
 import ImageGallery from '@/components/product/ImageGallery';
 import ActionButtons from '@/components/product/ActionButtons';
+import DescriptionHtml from '@/components/product/DescriptionHtml';
 import { fetchApi } from '@/lib/api-data';
 
 const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 function preImg(p: string) { if (!p) return ''; if (p.startsWith('http')) return p; return CDN + '/' + p; }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {
+  const { id: slug } = await params;
+  const product = await fetchApi(`/products/${slug}`);
+  if (!product) return { title: 'Product Not Found' };
+  const name = product.name?.en || product.name_en || product.slug;
+  return {
+    title: name,
+    description: (product.description?.en || '').replace(/<[^>]+>/g, '').substring(0, 160),
+    openGraph: {
+      title: name,
+      description: (product.description?.en || '').replace(/<[^>]+>/g, '').substring(0, 160),
+      images: [product.image?.startsWith('http') ? product.image : `https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/${product.image}`],
+    },
+  };
+}
 
 export default async function ProductDetailPage({
   params,
@@ -27,7 +44,12 @@ export default async function ProductDetailPage({
   const images: string[] = Array.isArray(product.images) ? product.images.map(preImg) : [];
   if (!images.length && product.image) images.push(preImg(product.image));
   const categorySlug = product.categorySlug || product.category_slug || '';
-  const descriptionHtml = product.description?.en || product.description_en || '';
+  const descriptionHtml = (product.description?.en || product.description_en || '')
+    .replace(/src=\"products\/load_icon\.gif\"[^>]*data-original=\"([^\"]+)\"[^>]*>/g, '<img src=\"'+CDN+'/$1\">')
+    .replace(/src=\"products\/(?!load_icon)/g, 'src=\"'+CDN+'/products/')
+    .replace(/<\/h2>,/g, '</h2>')
+    .replace(/Tags:\s*/g, '')
+    .replace(/<div class="product_cont_p_99713">[\s\S]*$/, '');
   const categoryName = product.categoryName?.en || '';
 
   return (
@@ -71,23 +93,13 @@ export default async function ProductDetailPage({
           </div>
         </div>
 
-        {descriptionHtml && (
-          <div className="mt-12 border rounded-lg overflow-hidden">
-            <div className="bg-gray-100 px-4 py-2.5 text-sm font-semibold text-gray-700 border-b">
-              Product Description
-            </div>
-            <div
-              className="p-6 text-sm text-gray-600 leading-relaxed description-content"
-              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-            />
-          </div>
-        )}
+        <DescriptionHtml html={descriptionHtml} />
 
         <SimilarProducts locale={locale} products={related.map((r: any) => ({
           id: r.id,
           slug: r.slug,
           name_en: r.name?.en || '',
-          image: r.image || '',
+          image: preImg(r.image || ''),
         }))} />
       </div>
     </div>
