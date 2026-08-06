@@ -5,6 +5,8 @@ import { Upload, X, Loader2 } from 'lucide-react';
 import { getToken } from '@/lib/api';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
+function preImg(p: string) { if (!p) return ''; if (p.startsWith('http')) return p; return CDN + '/' + p; }
 
 interface Props {
   value: string;
@@ -41,7 +43,7 @@ export default function ImageUploader({ value, onChange }: Props) {
     <div>
       {value ? (
         <div className="relative inline-block group">
-          <img src={value} alt="" className="w-32 h-32 object-cover rounded border" />
+          <img src={preImg(value)} alt="" className="w-32 h-32 object-cover rounded border" />
           <button
             onClick={() => onChange('')}
             className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition"

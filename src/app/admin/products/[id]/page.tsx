@@ -7,6 +7,7 @@ import { products as productsApi, isLoggedIn } from '@/lib/api';
 import { categories as hardcodedCats } from '@/data/categories';
 import { ArrowLeft, Save } from 'lucide-react';
 import ImageUploader from '@/components/admin/ImageUploader';
+import GalleryEditor from '@/components/admin/GalleryEditor';
 
 export default function AdminProductEditPage() {
   const params = useParams();
@@ -149,11 +150,7 @@ export default function AdminProductEditPage() {
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Gallery Images (JSON array)</label>
-          <textarea value={form.images} onChange={e => setForm({...form, images: e.target.value})}
-            rows={4} className="w-full border border-gray-300 rounded px-3 py-2 text-sm font-mono focus:outline-none focus:border-brand-red" />
-        </div>
+        <GalleryEditor images={form.images} onChange={(v) => setForm({...form, images: v})} />
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Description (HTML)</label>
