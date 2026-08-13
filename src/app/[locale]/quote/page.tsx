@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function QuotePage() {
   const [submitted, setSubmitted] = useState(false);
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+  const API = '/api';
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' });
 
   const handleSubmit = async (e: React.FormEvent) => {

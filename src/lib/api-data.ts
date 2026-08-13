@@ -1,4 +1,7 @@
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+// Server-side needs absolute URL; client uses relative /api → rewrites proxy (avoids mixed content)
+const API = typeof window === 'undefined'
+  ? (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api')
+  : '/api';
 const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 
 function preImg(path: string): string {

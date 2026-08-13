@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { X, Send, Loader2 } from 'lucide-react';
 import { companyInfo } from '@/data/company';
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+const API = '/api';
 
 interface Props {
   open: boolean;

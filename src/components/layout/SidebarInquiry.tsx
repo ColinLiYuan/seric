@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Loader2, Send } from 'lucide-react';
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+const API = '/api';
 
 export default function SidebarInquiry({ leaveMessageText, sendMessageText, enterEmailText, sendText }: {
   leaveMessageText: string;

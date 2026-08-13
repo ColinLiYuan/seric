@@ -16,7 +16,7 @@ export default function ContactSection({ locale }: { locale: string }) {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+  const API = '/api';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

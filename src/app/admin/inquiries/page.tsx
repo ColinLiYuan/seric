@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getToken } from '@/lib/api';
 import Pagination from '@/components/admin/Pagination';
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:26987/api';
+const API = '/api';
 const PAGE_SIZE = 20;
 
 export default function AdminInquiriesPage() {
