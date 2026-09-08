@@ -11,6 +11,17 @@ import { fetchApi } from '@/lib/api-data';
 const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 function preImg(p: string) { if (!p) return ''; if (p.startsWith('http')) return p; return CDN + '/' + p; }
 
+// Render product pages on-demand and cache them (ISR) instead of rendering on
+// every request. `revalidate` re-renders a page after it becomes stale.
+export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  // Return [] to opt into on-demand ISR: no pages are built upfront, but the
+  // first visit to each slug is cached for `revalidate` seconds.
+  return [];
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {
   try {
     const { id: slug } = await params;
