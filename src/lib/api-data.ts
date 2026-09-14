@@ -16,7 +16,12 @@ function preImg(path: string): string {
 
 export async function fetchApi(path: string) {
   try {
-    const res = await fetch(`${API}${path}`, { next: { revalidate: REVALIDATE_SECONDS } });
+    const res = await fetch(`${API}${path}`, {
+      next: { revalidate: REVALIDATE_SECONDS },
+      // Fail fast instead of hanging the build/render when the backend is
+      // unreachable (a dropped connection can stall `fetch` indefinitely).
+      signal: AbortSignal.timeout(10000),
+    });
     if (res.status === 404) return null;
     if (!res.ok) return [];
     const json = await res.json();
