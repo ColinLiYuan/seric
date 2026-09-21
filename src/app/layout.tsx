@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "url": "https://www.hydra-pumps.com",
           "logo": "https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev/products/logo.gif",
           "email": "salesseric@aliyun.com",
-          "telephone": "+86 17620189025",
+          "telephone": "+86 13824423871",
           "address": { "@type": "PostalAddress", "addressLocality": "Guangzhou", "addressCountry": "CN" },
           "sameAs": ["https://wa.me/85362157192"]
         }) }} />
