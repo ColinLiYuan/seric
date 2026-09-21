@@ -17,9 +17,20 @@ export const revalidate = 3600;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  // Return [] to opt into on-demand ISR: no pages are built upfront, but the
-  // first visit to each slug is cached for `revalidate` seconds.
-  return [];
+  // Pre-render the English product pages at build time so they're served as
+  // static HTML with zero function CPU (en is the locale Google actually
+  // crawls for this B2B site). Other locales, plus products added after this
+  // build, stay on-demand ISR via `dynamicParams` + `revalidate`.
+  //
+  // NOTE: return the full { locale, id } pair. In this Next.js version a child
+  // `generateStaticParams` that returns only `{ id }` is NOT combined with the
+  // parent `[locale]` params, so it must emit both segments itself.
+  try {
+    const products = await fetchApi('/products');
+    return (products || []).map((p: any) => ({ locale: 'en', id: p.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {

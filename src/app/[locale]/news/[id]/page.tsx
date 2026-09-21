@@ -14,7 +14,15 @@ export const revalidate = 3600;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  return [];
+  // Pre-render the English article pages at build time (zero function CPU);
+  // other locales stay on-demand ISR via `dynamicParams` + `revalidate`.
+  // Must emit the full { locale, id } pair — see note in products/[id]/page.tsx.
+  try {
+    const blogs = await fetchApi('/blogs');
+    return (blogs || []).map((b: any) => ({ locale: 'en', id: b.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; id: string }> }) {
