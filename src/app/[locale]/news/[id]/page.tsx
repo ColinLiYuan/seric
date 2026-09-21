@@ -8,9 +8,9 @@ import type { Metadata } from 'next';
 const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 function preImg(p: string) { if (!p) return ''; if (p.startsWith('http')) return p; return CDN + '/' + p; }
 
-// Render news pages on-demand and cache them (ISR) instead of rendering on
-// every request.
-export const revalidate = 3600;
+// Pre-rendered static HTML, cached forever (zero function CPU). Content changes
+// take effect on the next deploy (rebuild), not on a timer.
+export const revalidate = false;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

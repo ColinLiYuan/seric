@@ -5,8 +5,9 @@ import { getTranslations } from 'next-intl/server';
 import ProductsBrowser from '@/components/product/ProductsBrowser';
 import ProductsView from '@/components/product/ProductsView';
 
-// Cache the products listing (ISR) instead of rendering on every request.
-export const revalidate = 3600;
+// Pre-rendered static HTML, cached forever (zero function CPU). Product changes
+// take effect on the next deploy (rebuild), not on a timer.
+export const revalidate = false;
 
 export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

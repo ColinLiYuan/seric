@@ -4,9 +4,9 @@ const API = typeof window === 'undefined'
   : '/api';
 const CDN = 'https://pub-81f2ee8c38ae4937a81a67bd0db6be8e.r2.dev';
 
-// Cache public API responses for 1h so pages can be statically generated /
-// served via ISR instead of rendering on every request (saves Vercel CPU).
-export const REVALIDATE_SECONDS = 3600;
+// Cache public API responses indefinitely. Pages are baked into static HTML at
+// build time and never revalidated, so they cost zero function CPU at runtime.
+// Product/news changes take effect on the next deploy (rebuild).
 
 function preImg(path: string): string {
   if (!path) return '';
@@ -17,7 +17,7 @@ function preImg(path: string): string {
 export async function fetchApi(path: string) {
   try {
     const res = await fetch(`${API}${path}`, {
-      next: { revalidate: REVALIDATE_SECONDS },
+      cache: 'force-cache',
       // Fail fast instead of hanging the build/render when the backend is
       // unreachable (a dropped connection can stall `fetch` indefinitely).
       signal: AbortSignal.timeout(10000),
